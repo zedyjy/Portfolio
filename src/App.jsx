@@ -153,7 +153,7 @@ const scrollToSection = (id) => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-gray-700 hover:text-rose-600"
+          className="md:hidden text-3xl text-gray-700 hover:text-rose-600"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           ☰
@@ -733,7 +733,7 @@ const scrollToSection = (id) => {
     ].map((lang, index) => (
       <div
         key={index}
-        className="bg-gradient-to-r from-blue-100/30 to-sky-100/20 border border-blue-300/30 p-4 rounded-xl flex items-center justify-between hover:scale-105 transition-all duration-300 flex-1 min-w-[33rem] max-w-sm"
+        className="bg-gradient-to-r from-blue-100/30 to-sky-100/20 border border-blue-300/30 p-4 rounded-xl flex items-center justify-between hover:scale-105 transition-all duration-300 flex-1 min-w-[25rem] max-w-sm"
         >
 
         <div className="flex space-x-3">
@@ -824,7 +824,7 @@ const scrollToSection = (id) => {
 
 
       {/* Footer */}
-      <footer className="py-12 px-6 text-center border-t border-purple-700">
+      <footer className="py-12 px-6 max-w-6xl text-center border-t border-purple-700">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-center space-x-8 mb-6">
             <a
