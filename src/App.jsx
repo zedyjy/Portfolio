@@ -156,16 +156,19 @@ export default function App() {
               <a
                 href="mailto:zeynep.dellal@gmail.com"
                 className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
+                title="If this doesn't open your email app, you can copy: zeynep.dellal@gmail.com"
               >
                 <Mail size={20} />
                 <span>Get In Touch</span>
               </a>
               <a
-                href="/Zeynep Dellal Resume.pdf"
+                href={`${import.meta.env.BASE_URL}Zeynep Dellal Resume.pdf`}
                 className="border-2 border-pink-400 text-rose-600 hover:bg-pink-400 hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
-              >
+                target="_blank"
+                rel="noopener noreferrer"
+                >
                 Resume
-              </a>
+            </a>
             </div>
             
             <div className="flex justify-center md:justify-start space-x-10">
@@ -198,7 +201,7 @@ export default function App() {
               I recently graduated with a degree in Computer Science (May 2025) and love working on projects that connect hardware and software. 
               I'm especially interested in areas like embedded systems and AI,but I'm open to working in any area where I can learn and contribute.
             </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-700 leading-relaxed">
               I thrive on tackling complex challenges, whether it's optimizing IoT communication protocols, developing machine learning models, 
               or creating full-stack applications. My goal is to build technology that makes a meaningful impact.
             </p>
