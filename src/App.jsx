@@ -119,7 +119,7 @@ export default function App() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full blur-xl opacity-50 animate-pulse"></div>
               <img 
-                src="/DSCF0747.JPG" 
+                src={`${import.meta.env.BASE_URL}DSCF0747.JPG`}  
                 alt="Zeynep Dellal"
                 className="relative w-80 h-80 object-cover rounded-full border-4 border-white/20 shadow-2xl"
               />
