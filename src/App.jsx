@@ -4,33 +4,56 @@ import { Globe, PawPrint, GraduationCap, Scale, ChevronDown, Mail, ExternalLink,
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    document.title = "Zeynep Dellal - Software Engineer";
-    
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = ['hero', 'about', 'education', 'projects', 'experience', 'skills', 'languages', 'hobbies', 'contact'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
-    };
+useEffect(() => {
+  document.title = "Zeynep Dellal - Software Engineer";
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleScroll = () => {
+    // Toggle navbar style
+    setIsScrolled(window.scrollY > 20);
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    // Track active section
+    const sections = [
+      "hero",
+      "about",
+      "education",
+      "experience",
+      "projects",
+      "skills",
+      "languages",
+      "hobbies",
+      "contact"
+    ];
+
+    const current = sections.find((section) => {
+      const el = document.getElementById(section);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      }
+      return false;
+    });
+
+    if (current) setActiveSection(current);
   };
+
+  // Run on load in case user is already scrolled
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+const scrollToSection = (id) => {
+  const section = document.getElementById(id);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+    setMobileMenuOpen(false); // if you’re closing mobile menu
+  }
+};
+
 
   const TechIcon = ({ name, color }) => {
     const icons = {
@@ -71,41 +94,107 @@ export default function App() {
   return (
     <div className="bg-gradient-to-br from-white-100 via-rose-100 to-orange-100 text-gray-800 min-h-screen">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white text-gray-900 shadow-md' : 'bg-transparent'
-      }`}>
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">
-              ZD
-            </div>
-            <div className="hidden md:flex space-x-8">
-              {['About', 'Education', 'Experience', 'Projects',  'Skills',  'Languages', 'Hobbies', 'Contact'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className={`hover:text-rose-600 transition-colors ${
-                    activeSection === item.toLowerCase() ? 'text-rose-600' : 'text-gray-700'
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-            <div className="flex space-x-4">
-              <a href="https://github.com/zedyjy" className="text-gray-700 hover:text-rose-600 transition-colors transform hover:scale-110">
-                <Github size={24} />
-              </a>
-              <a href="https://www.linkedin.com/in/zeynep-dellal" className="text-gray-700 hover:text-blue-400 transition-colors transform hover:scale-110">
-                <Linkedin size={24} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+<nav
+  className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+    isScrolled ? "bg-white text-gray-900 shadow-md" : "bg-transparent"
+  }`}
+>
+  <div className="max-w-6xl mx-auto px-6 py-4">
+    <div className="flex justify-between items-center">
+      {/* Logo */}
+      <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">
+        ZD
+      </div>
+
+      {/* Desktop Nav */}
+      <div className="hidden md:flex space-x-8">
+        {[
+          "About",
+          "Education",
+          "Experience",
+          "Projects",
+          "Skills",
+          "Languages",
+          "Hobbies",
+          "Contact",
+        ].map((item) => (
+          <button
+            key={item}
+            onClick={() => scrollToSection(item.toLowerCase())}
+            className={`hover:text-rose-600 transition-colors font-medium ${
+              activeSection === item.toLowerCase()
+                ? "text-rose-600"
+                : "text-gray-700"
+            }`}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+
+      {/* Social Links + Mobile Menu Icon */}
+      <div className="flex items-center space-x-4 md:space-x-6">
+        <a
+          href="https://github.com/zedyjy"
+          className="text-gray-700 hover:text-rose-600 transition-colors transform hover:scale-110"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Github size={24} />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/zeynep-dellal"
+          className="text-gray-700 hover:text-blue-400 transition-colors transform hover:scale-110"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Linkedin size={24} />
+        </a>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-gray-700 hover:text-rose-600"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* Mobile Dropdown Menu */}
+  {mobileMenuOpen && (
+    <div className="md:hidden bg-white px-6 py-4 shadow space-y-2 transition-all duration-300">
+      {[
+        "About",
+        "Education",
+        "Experience",
+        "Projects",
+        "Skills",
+        "Languages",
+        "Hobbies",
+        "Contact",
+      ].map((item) => (
+        <button
+          key={item}
+          onClick={() => {
+            scrollToSection(item.toLowerCase());
+            setMobileMenuOpen(false);
+          }}
+          className={`block w-full text-left py-2 font-medium text-gray-800 hover:text-rose-600 ${
+            activeSection === item.toLowerCase() ? "text-rose-600" : ""
+          }`}
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  )}
+</nav>
+
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="hero" className="min-h-screen pt-32 flex items-center justify-center relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-500/30 rounded-full blur-3xl animate-pulse"></div>
