@@ -2,7 +2,7 @@
   "name": "zeynep-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://zedyjy.github.io/portfolio-website",
+  "homepage": "https://zedyjy.github.io/Portfolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
