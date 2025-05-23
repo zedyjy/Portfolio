@@ -162,7 +162,7 @@ export default function App() {
                 <span>Get In Touch</span>
               </a>
               <a
-                href={`${import.meta.env.BASE_URL}Zeynep Dellal Resume.pdf`}
+                href={`${import.meta.env.BASE_URL}Zeynep-Dellal-Resume.pdf`}
                 className="border-2 border-pink-400 text-rose-600 hover:bg-pink-400 hover:text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
                 target="_blank"
                 rel="noopener noreferrer"
